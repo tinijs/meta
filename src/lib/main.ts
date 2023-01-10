@@ -31,6 +31,8 @@ export function initMetas(options?: MetaOptions) {
 }
 
 export class Meta {
+  private locale = TINI_METAS.locale;
+
   private suffix?: string;
   private suffixConnector?: string;
   private suffixTranslations?: Record<string, string>;
@@ -52,15 +54,60 @@ export class Meta {
     this.metasTranslations = metasTranslations;
   }
 
-  getSuffix(forLocale?: string) {
-    return this.suffixTranslations?.[forLocale || 'en-US'] || this.suffix;
+  changeLocale(locale: string) {
+    this.locale = locale;
   }
 
-  getMetas(forLocale?: string) {
-    return this.metasTranslations?.[forLocale || 'en-US'] || this.metas;
+  getSuffix() {
+    return (
+      this.suffixTranslations?.[this.locale || TINI_METAS.locale] || this.suffix
+    );
   }
 
-  extractDefaultMetas() {
+  getMetas() {
+    return (
+      this.metasTranslations?.[this.locale || TINI_METAS.locale] || this.metas
+    );
+  }
+
+  setHomeMetas() {
+    return this.setPageMetas({}, true);
+  }
+
+  setPageMetas(pageMetas: PageMetas = {}, noSuffix?: boolean) {
+    const customMetas: CustomizableMetas = pageMetas;
+    // image
+    if (!customMetas.image && pageMetas.images) {
+      customMetas.image = (pageMetas.images.xl || pageMetas.images.default).src;
+    }
+    // author name and url
+    if (
+      (!customMetas.authorName || !customMetas.authorUrl) &&
+      pageMetas.authors
+    ) {
+      const firstAuthorId = Object.keys(pageMetas.authors)[0];
+      if (firstAuthorId) {
+        const author = pageMetas.authors[firstAuthorId];
+        // authorName
+        if (!customMetas.authorName) {
+          customMetas.authorName = author.name;
+        }
+        // authorUrl
+        if (!customMetas.authorUrl) {
+          customMetas.authorUrl = author.url;
+        }
+      }
+    }
+    // apply metas
+    const metas = this.processMetaData(customMetas, noSuffix);
+    changePageTitle(metas.title || TINI_METAS.title);
+    changePageLang(metas.lang || TINI_METAS.lang);
+    changeMetaTags(metas);
+    // result
+    return metas;
+  }
+
+  private extractDefaultMetas() {
     const url = getMetaTagContent('itemprop="url"') || TINI_METAS.url;
     const title = getMetaTagContent('itemprop="name"') || TINI_METAS.title;
     const description =
@@ -110,53 +157,14 @@ export class Meta {
     };
   }
 
-  updatePageMetas(
-    pageMetas: PageMetas = {},
-    withSuffix = false,
-    forLocale?: string
-  ) {
-    const customMetas: CustomizableMetas = pageMetas;
-    // image
-    if (!customMetas.image && pageMetas.images) {
-      customMetas.image = (pageMetas.images.xl || pageMetas.images.default).src;
-    }
-    // author name and url
-    if (
-      (!customMetas.authorName || !customMetas.authorUrl) &&
-      pageMetas.authors
-    ) {
-      const firstAuthorId = Object.keys(pageMetas.authors)[0];
-      if (firstAuthorId) {
-        const author = pageMetas.authors[firstAuthorId];
-        // authorName
-        if (!customMetas.authorName) {
-          customMetas.authorName = author.name;
-        }
-        // authorUrl
-        if (!customMetas.authorUrl) {
-          customMetas.authorUrl = author.url;
-        }
-      }
-    }
-    // apply metas
-    const metas = this.processMetaData(customMetas, withSuffix, forLocale);
-    changePageTitle(metas.title || 'App');
-    changePageLang(metas.lang || 'en');
-    changeMetaTags(metas);
-  }
-
-  private processMetaData(
-    customMetas: CustomizableMetas,
-    withSuffix = false,
-    forLocale?: string
-  ) {
-    const appSuffix = this.getSuffix(forLocale);
-    const appMetas = this.getMetas(forLocale);
+  private processMetaData(customMetas: CustomizableMetas, noSuffix?: boolean) {
+    const appSuffix = this.getSuffix();
+    const appMetas = this.getMetas();
     // custom
     const url = customMetas['url'] || location.href;
     let title = customMetas['title'] || appMetas['title'];
     // add suffix
-    if (withSuffix && appSuffix) {
+    if (appSuffix && !noSuffix) {
       title = `${title}${this.suffixConnector || ' — '}${appSuffix}`;
     }
     const description = customMetas['description'] || appMetas['description'];
