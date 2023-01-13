@@ -1,9 +1,9 @@
 {
   "name": "@tinijs/meta",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The Meta module for TiniJS apps.",
   "author": "Lam Nhan",
-  "homepage": "https://tinijs.lamnhan.com",
+  "homepage": "https://tinijs.dev",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "url": "https://github.com/tinijs/meta/issues"
   },
   "peerDependencies": {
-    "@tinijs/core": "0.0.2"
+    "@tinijs/core": "file:../core/tinijs-core-0.0.3.tgz"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
