@@ -22,8 +22,8 @@ export const TINI_METAS = {
   ogSiteName: 'TiniJS App',
   fbAppId: '000000000000000',
   twitterCard: 'summary_large_image',
-  twitterCreator: '@tinijs',
-  twitterSite: '@tinijs',
+  twitterCreator: '@tini_js',
+  twitterSite: '@tini_js',
 } as {[P in keyof AppMetas]-?: AppMetas[P]};
 
 export function initMetas(options?: MetaOptions) {
