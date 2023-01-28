@@ -1,0 +1,10 @@
+{
+  "name": "@tinijs/meta",
+  "members": [
+    ["function", "initMetas"],
+    ["class", "Meta"],
+    ["decorator", "UseMeta"],
+    ["type", "AppMetas"],
+    ["type", "PageMetas"]
+  ]
+}
