@@ -8,7 +8,7 @@ To manually install the module: `npm i @tinijs/core`
 
 It is recommended to download the [Skeleton](https://github.com/tinijs/skeleton) for a ready-to-use structured project.
 
-For more, please visit: <https://tinijs.dev>
+For more, please visit: <https://tinijs.dev> (TODO)
 
 ## Usage
 
@@ -18,23 +18,19 @@ For more, please visit: <https://tinijs.dev>
 import {AppMetas} from '@tinijs/meta';
 
 // null = use the extracted values from index.html
-export const metas = null as unknown as AppMetas;
+export default null as unknown as AppMetas;
 ```
 
 - Init the module in `app.ts`
 
 ```ts
-import {initMetas, Meta} from '@tinijs/meta';
+import {initMetas} from '@tinijs/meta';
 
-import {metas} from './metas';
+import metas from './metas';
 
 @App()
 export class AppRoot extends TiniComponent {
-  $meta!: Meta;
-
-  onReady() {
-    this.$meta = initMetas({metas});
-  }
+  readonly $meta = initMetas({metas});
 }
 ```
 
@@ -49,8 +45,8 @@ const metas: PageMetas = {
   // ...
 };
 
-@Page('page-404')
-export class Page404 extends TiniComponent {
+@Page('app-page-404')
+export class AppPage404 extends TiniComponent {
   @UseMeta() meta!: Meta;
 
   onReady() {
