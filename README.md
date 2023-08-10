@@ -37,7 +37,7 @@ export class AppRoot extends TiniComponent {
 - Use in pages
 
 ```ts
-import {UseMeta, Meta, PageMetas} from '@tinijs/meta';
+import {GetMeta, Meta, PageMetas} from '@tinijs/meta';
 
 const metas: PageMetas = {
   title: 'Oops',
@@ -47,7 +47,7 @@ const metas: PageMetas = {
 
 @Page('app-page-404')
 export class AppPage404 extends TiniComponent {
-  @UseMeta() meta!: Meta;
+  @GetMeta() meta!: Meta;
 
   onReady() {
     this.meta.setPageMetas(metas);
