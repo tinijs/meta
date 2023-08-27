@@ -45,7 +45,9 @@ const metas: PageMetas = {
   // ...
 };
 
-@Page('app-page-404')
+@Page({
+  name: 'app-page-404',
+})
 export class AppPage404 extends TiniComponent {
   @GetMeta() meta!: Meta;
 
