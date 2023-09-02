@@ -1,12 +1,13 @@
-import {getAppInstance, TiniApp, Global} from '@tinijs/core';
+import {getAppInstance} from '@tinijs/core';
 
 import {MetaTagDefinition, AppMetas} from './types';
+import {NO_META_ERROR} from './consts';
+import {Meta} from './main';
 
-export function getMeta(): null {
-  const appOrGlobal = getAppInstance(true);
-  return (
-    (appOrGlobal as TiniApp).$meta || (appOrGlobal as Global).$tiniMeta || null
-  );
+export function getMeta() {
+  const meta = getAppInstance().meta as undefined | Meta;
+  if (!meta) throw new Error(NO_META_ERROR);
+  return meta;
 }
 
 /*

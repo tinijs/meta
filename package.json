@@ -35,7 +35,7 @@
     "url": "https://github.com/tinijs/meta/issues"
   },
   "peerDependencies": {
-    "@tinijs/core": "^0.8.0"
+    "@tinijs/core": "file:../core"
   },
   "devDependencies": {
     "@types/node": "^20.4.8",
