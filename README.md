@@ -64,7 +64,7 @@ export class AppPage404 extends TiniComponent {
 ## Developement
 
 - Create a home for TiniJS: `mkdir TiniJS && cd TiniJS`
-- Fork the repo: `git clone https://github.com/tinijs/meta.git`
+- Fork the repo
 - Install dependencies: `cd meta && npm i`
 - Make changes & preview locally: `npm run build && npm pack`
 - Push changes & create a PR 👌
