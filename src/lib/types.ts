@@ -1,4 +1,7 @@
+import {Meta} from './main';
+
 export interface MetaOptions {
+  autoPageMetas?: boolean;
   suffix?: string;
   suffixTranslations?: Record<string, string>;
   metas?: AppMetas;
@@ -48,4 +51,12 @@ export interface PageMetas extends CustomizableMetas {
 
 export interface MetaTranslations {
   [locale: string]: AppMetas;
+}
+
+export interface AppWithMeta {
+  meta: Meta;
+}
+
+export interface PageWithMetas {
+  metas: PageMetas;
 }

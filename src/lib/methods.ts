@@ -1,13 +1,9 @@
-import {getAppInstance} from '@tinijs/core';
-
 import {MetaTagDefinition, AppMetas} from './types';
-import {NO_META_ERROR} from './consts';
-import {Meta} from './main';
+import {TINI_APP_CONTEXT, NO_META_ERROR} from './consts';
 
 export function getMeta() {
-  const meta = getAppInstance().meta as undefined | Meta;
-  if (!meta) throw new Error(NO_META_ERROR);
-  return meta;
+  if (!TINI_APP_CONTEXT.meta) throw new Error(NO_META_ERROR);
+  return TINI_APP_CONTEXT.meta;
 }
 
 /*

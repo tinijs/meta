@@ -1,3 +1,6 @@
+import {registerGlobalHook, ComponentTypes, LifecycleHooks} from '@tinijs/core';
+
+import {TINI_APP_CONTEXT} from './consts';
 import {
   getMetaTagContent,
   getLinkTagHref,
@@ -5,7 +8,13 @@ import {
   changePageLang,
   changeMetaTags,
 } from './methods';
-import {CustomizableMetas, AppMetas, PageMetas, MetaOptions} from './types';
+import {
+  PageWithMetas,
+  CustomizableMetas,
+  AppMetas,
+  PageMetas,
+  MetaOptions,
+} from './types';
 
 export const TINI_METAS = {
   url: 'https://tinijs.dev',
@@ -26,8 +35,22 @@ export const TINI_METAS = {
   twitterSite: '@tini_js',
 } as {[P in keyof AppMetas]-?: AppMetas[P]};
 
-export function initMetas(options?: MetaOptions) {
-  return new Meta(options);
+export function initMeta(options?: MetaOptions) {
+  const meta = new Meta(options);
+  // auto page metas
+  if (options?.autoPageMetas) {
+    registerGlobalHook(
+      ComponentTypes.Page,
+      LifecycleHooks.OnReady,
+      ({source, appContext}) =>
+        (appContext as typeof TINI_APP_CONTEXT).meta?.setPageMetas(
+          (source as typeof source & PageWithMetas).metas,
+          location.pathname === '/'
+        )
+    );
+  }
+  //result
+  return (TINI_APP_CONTEXT.meta = meta);
 }
 
 export class Meta {

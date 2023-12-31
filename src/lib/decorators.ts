@@ -1,11 +1,9 @@
 import {getMeta} from './methods';
 
-export function GetMeta() {
-  return function (target: Object, propertyKey: string) {
-    Reflect.defineProperty(target, propertyKey, {
+export function UseMeta() {
+  return function (prototype: any, propertyName: string) {
+    Object.defineProperty(prototype, propertyName, {
       get: () => getMeta(),
-      enumerable: false,
-      configurable: false,
     });
   };
 }
