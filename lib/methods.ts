@@ -1,5 +1,5 @@
-import {MetaTagDefinition, AppMetas} from './types';
-import {TINI_APP_CONTEXT, NO_META_ERROR} from './consts';
+import {MetaTagDefinition, AppMetas} from './types.js';
+import {TINI_APP_CONTEXT, NO_META_ERROR} from './consts.js';
 
 export function getMeta() {
   if (!TINI_APP_CONTEXT.meta) throw new Error(NO_META_ERROR);

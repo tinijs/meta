@@ -1,4 +1,4 @@
-import {Meta} from './main';
+import {Meta} from './main.js';
 
 export interface MetaOptions {
   autoPageMetas?: boolean;

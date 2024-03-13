@@ -1,20 +1,20 @@
 import {registerGlobalHook, ComponentTypes, LifecycleHooks} from '@tinijs/core';
 
-import {TINI_APP_CONTEXT} from './consts';
+import {TINI_APP_CONTEXT} from './consts.js';
 import {
   getMetaTagContent,
   getLinkTagHref,
   changePageTitle,
   changePageLang,
   changeMetaTags,
-} from './methods';
+} from './methods.js';
 import {
   PageWithMetas,
   CustomizableMetas,
   AppMetas,
   PageMetas,
   MetaOptions,
-} from './types';
+} from './types.js';
 
 export const TINI_METAS = {
   url: 'https://tinijs.dev',

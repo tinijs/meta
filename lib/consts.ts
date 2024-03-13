@@ -1,6 +1,6 @@
 import {TINI_APP_CONTEXT as BASE_TINI_APP_CONTEXT} from '@tinijs/core';
 
-import {Meta} from './main';
+import {Meta} from './main.js';
 
 export const MODULE_NAME = 'meta';
 export const MODULE_ID = `tini:${MODULE_NAME}`;

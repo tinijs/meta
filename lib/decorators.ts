@@ -1,4 +1,4 @@
-import {getMeta} from './methods';
+import {getMeta} from './methods.js';
 
 export function UseMeta() {
   return function (prototype: any, propertyName: string) {
