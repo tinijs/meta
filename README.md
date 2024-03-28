@@ -1,14 +1,19 @@
 # TiniJS Meta
 
+> [!IMPORTANT]
+> This previously experiment is wrapped up, moving forward the development will happen at <https://github.com/tinijs/tinijs/tree/main/packages/meta>.
+>
+> If you want to use the experimental version still, please use the version `0.16.0`.
+
 The Meta module for TiniJS apps.
 
 ## Install
 
-To manually install the module: `npm i @tinijs/core`
+To manually install the module: `npm i @tinijs/meta@0.16.0`
 
 It is recommended to download the [Skeleton](https://github.com/tinijs/skeleton) for a ready-to-use structured project.
 
-For more, please visit: <https://tinijs.dev> (TODO)
+For more, please visit: <https://tinijs.dev>
 
 ## Usage
 
